@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  database:
+    container_name: database
+    image: mysql:8.0.28-debian
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: webapp
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./mysql:/var/lib/mysql
+  webapp:
+    build: .
+    image: hatemsoliman13/symfony6.1
+    container_name: webapp
+    ports:
+      - 80:80
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - database
