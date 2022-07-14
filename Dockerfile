@@ -1,10 +1,10 @@
 FROM php:8.1.4-apache-bullseye
 
 RUN apt update \
-    &&  apt-get install -y \
-    libzip-dev \
-    zip \
-    && docker-php-ext-install zip
+    && apt install -y libzip-dev zip \
+    && docker-php-ext-configure zip \
+    && docker-php-ext-install zip \
+    && docker-php-ext-install pdo pdo_mysql
 
 WORKDIR /var/www/html
 
