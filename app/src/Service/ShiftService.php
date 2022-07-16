@@ -5,18 +5,10 @@ namespace App\Serive;
 use App\Entity\Shift;
 use DateTime;
 use App\Entity\Worker;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 
 class ShiftService
 {
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function create(Worker $worker, Request $request)
     {
         $shift = new Shift();
@@ -26,7 +18,6 @@ class ShiftService
         $shift->setCreateDateTime(new DateTime('now'));
         $shift->setUpdateDateTime(new DateTime('now'));
 
-        $this->entityManager->persist($shift);
         return $shift;
     }
 

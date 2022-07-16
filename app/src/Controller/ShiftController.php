@@ -6,8 +6,6 @@ use App\Entity\Shift;
 use App\Entity\Worker;
 use App\Serive\ShiftService;
 use App\Serive\WorkerService;
-use DateTime;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -52,12 +50,15 @@ class ShiftController extends AbstractController
         ]);
 
         if (empty($worker)) {
-            $workerService = new WorkerService($entityManager);
+            $workerService = new WorkerService();
             $worker = $workerService->create($request);
         }
 
-        $shiftService = new ShiftService($entityManager);
-        $shiftService->create($worker, $request);
+        $shiftService = new ShiftService();
+        $shift = $shiftService->create($worker, $request);
+
+        $entityManager->persist($worker);
+        $entityManager->persist($shift);
 
         try {
             $entityManager->flush();
@@ -110,10 +111,10 @@ class ShiftController extends AbstractController
             return $this->redirectToRoute('index_shifts');
         }
 
-        $workerService = new WorkerService($entityManager);
+        $workerService = new WorkerService();
         $workerService->update($shift->getWorker(), $request);
 
-        $shiftService = new ShiftService($entityManager);
+        $shiftService = new ShiftService();
         $shiftService->update($shift, $request);
 
         try {
