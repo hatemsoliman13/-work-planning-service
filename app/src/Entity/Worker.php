@@ -125,4 +125,12 @@ class Worker
 
         return $this;
     }
+
+    /**
+     * Get the value of id
+     */ 
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

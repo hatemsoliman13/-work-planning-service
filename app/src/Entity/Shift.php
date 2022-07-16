@@ -8,8 +8,15 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
+ * @Table(name="shift", 
+ *    uniqueConstraints={
+ *        @UniqueConstraint(name="worker_shift_unique", 
+ *            columns={"worker_id", "shift_date_time"})
+ *    })
  * @ORM\Entity(repositoryClass=ShiftRepository::class)
  */
 class Shift
@@ -28,7 +35,7 @@ class Shift
     private $worker;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, name="shift_hours")
      */
     private $shiftHours;
 
@@ -145,5 +152,13 @@ class Shift
         $this->worker = $worker;
 
         return $this;
+    }
+
+    /**
+     * Get the value of id
+     */ 
+    public function getId(): int
+    {
+        return $this->id;
     }
 }
