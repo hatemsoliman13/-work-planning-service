@@ -1,0 +1,25 @@
+{% extends 'shifts/base.html.twig' %}
+{% block body %}
+	<form action="{{ path('create_shift') }}" method="POST">
+		<input type="hidden" name="token" value="{{ csrf_token('create-shift') }}"/>
+		<div>
+			<label for="name">Worker name:</label>
+			<input type="text" name="name" id="name" required/>
+		</div><br>
+		<div>
+			<label for="shift_date">Shift date:</label>
+			<input type="date" name="shift_date" id="shift_date" max='2030-01-01' required/>
+		</div><br>
+		<div>
+			<label for="shift_hours" required>Shift hours:</label>
+			<input type="radio" id="first_shift" name="shift_hours" value="00-08" checked>
+			<label for="first_shift">00-08</label>
+			<input type="radio" id="second_shift" name="shift_hours" value="08-16">
+			<label for="second_shift">08-16</label>
+			<input type="radio" id="third_shift" name="shift_hours" value="16-24">
+			<label for="">16-24</label>
+			<div><br>
+				<button>Submit</button>
+			</div>
+		</form>
+	{% endblock body %}

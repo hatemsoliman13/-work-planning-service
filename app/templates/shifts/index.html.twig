@@ -1,0 +1,40 @@
+{% extends 'shifts/base.html.twig' %} {% block body %}
+<div>
+	<form action="{{ path('create_shift') }}">
+		<input type="submit" value="Create New Shift"/>
+	</form>
+</div>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Worker</th>
+        <th>Shift Date</th>
+        <th>Shift Hour</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for shift in shifts %}
+        <tr>
+          <td>
+            <a href="{{ path('show_shift', { id: shift.id }) }}">
+              {{ shift.worker.name }}
+            </a>
+          </td>
+          <td>
+            <a href="{{ path('show_shift', { id: shift.id }) }}">
+              {{ shift.shiftDateTime|date('Y-m-d') }}
+            </a>
+          </td>
+          <td>
+            <a href="{{ path('show_shift', { id: shift.id }) }}">
+              {{ shift.shiftHours }}
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Work Planning Service
+			{% endblock %}
+		</title>
+		{% block stylesheets %}{% endblock %}
+
+		{% block javascripts %}{% endblock %}
+	</head>
+	<body>
+		{% for message in app.flashes('notice') %}
+			<div class="flash-notice">
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% block body %}{% endblock %}
+	</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'shifts/base.html.twig' %}
+{% block body %}
+	<div>
+		<table>
+			<tr>
+				<th>Worker</th>
+				<th>Shift Date</th>
+				<th>Shift Hour</th>
+			</tr>
+			<tr>
+				<td>{{ shift.worker.name }}</td>
+				<td>{{ shift.shiftDateTime|date('Y-m-d') }}</td>
+				<td>{{ shift.shiftHours }}</td>
+			</tr>
+		</table>
+	</div>
+	<form action="{{ path('delete_shift', {id: shift.id}) }}" method="post">
+    <input type="hidden" name="token" value="{{ csrf_token('delete-shift') }}"/>
+		<input type="submit" value="Delete"/>
+	</form>
+	<form action="{{ path('update_shift', {id: shift.id}) }}">
+		<input type="submit" value="Update"/>
+	</form>
+
+{% endblock %}
