@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Shift;
 use App\Entity\Worker;
-use App\Serive\ShiftService;
-use App\Serive\WorkerService;
+use App\Service\ShiftService;
+use App\Service\WorkerService;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

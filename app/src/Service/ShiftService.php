@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Serive;
+namespace App\Service;
 
 use App\Entity\Shift;
 use DateTime;
@@ -15,8 +15,12 @@ class ShiftService
         $shift->setWorker($worker);
         $shift->setShiftHours($request->get('shift_hours'));
         $shift->setShiftDateTime(new DateTime($request->get('shift_date')));
-        $shift->setCreateDateTime(new DateTime('now'));
-        $shift->setUpdateDateTime(new DateTime('now'));
+        $shift->setCreateDateTime(
+            new DateTime($request->get('create_date_time')) ?? new DateTime('now')
+        );
+        $shift->setUpdateDateTime(
+            new DateTime($request->get('update_date_time')) ?? new DateTime('now')
+        );
 
         return $shift;
     }
@@ -26,7 +30,9 @@ class ShiftService
         $shift->setWorker($shift->getWorker());
         $shift->setShiftHours($request->get('shift_hours'));
         $shift->setShiftDateTime(new DateTime($request->get('shift_date')));
-        $shift->setUpdateDateTime(new DateTime('now'));
+        $shift->setUpdateDateTime(
+            new DateTime($request->get('update_date_time')) ?? new DateTime('now')
+        );
 
         return $shift;
     }
