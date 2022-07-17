@@ -9,3 +9,9 @@ down:
 
 stop:
 	docker-compose stop
+
+migrate:
+	docker exec webapp php ./app/bin/console doctrine:migrations:migrate 
+
+phpunit:
+	docker exec webapp php ./app/bin/phpunit ./app/tests
