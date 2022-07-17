@@ -133,4 +133,16 @@ class Worker
     {
         return $this->id;
     }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */ 
+    public function setId($id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 }
